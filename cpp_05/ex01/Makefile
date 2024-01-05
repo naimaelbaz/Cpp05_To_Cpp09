@@ -4,11 +4,17 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = Bureaucrat.cpp main.cpp GradeTooHighException.cpp GradeTooLowException.cpp Form.cpp
+SRCS =	main.cpp \
+		Bureaucrat.cpp \
+		GradeTooHighException.cpp \
+		GradeTooLowException.cpp \
+		GradeTooHighException_Form.cpp \
+		GradeTooLowException_Form.cpp \
+		Form.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-%.o: %.cpp Bureaucrat.hpp GradeTooHighException.hpp GradeTooLowException.hpp Form.hpp
+%.o: %.cpp Bureaucrat.hpp GradeTooHighException.hpp GradeTooLowException.hpp Form.hpp GradeTooHighException_Form.hpp GradeTooLowException_Form.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME) $(OBJS)

@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooLowException.cpp                           :+:      :+:    :+:   */
+/*   GradeTooLowException_Form.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 17:57:42 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 11:57:44 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/04 17:50:26 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/05 11:56:58 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "GradeTooLowException.hpp"
+#ifndef GRADETOOLOWEXCEPTION_FORM_HPP
+# define GRADETOOLOWEXCEPTION_FORM_HPP
 
-const char *Bureaucrat::GradeTooLowException::what() const throw()
+#include "Form.hpp"
+
+class Form::GradeTooLowException : public std::exception
 {
-	return "Grade of Bureaucrat is too Low";
-}
+public:
+	const	char *what() const throw();
+};
+
+#endif

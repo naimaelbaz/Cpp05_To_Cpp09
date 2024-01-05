@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 10:13:42 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/05 11:36:56 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,22 @@ Bureaucrat::Bureaucrat() : _name("Default")
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
 	if (grade < 1)
-	{
 		throw GradeTooHighException();
-	}
 	if (grade > 150)
-	{
 		throw GradeTooLowException();
-	}
 	_grade = grade;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& ob)
+	: _name(ob._name), _grade(ob._grade)
 {
-	*this = ob;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ob)
 {
 	if (this == &ob)
 		return *this;
-	_grade = ob._grade;
+	this->_grade = ob._grade;
 	return *this;
 }
 
