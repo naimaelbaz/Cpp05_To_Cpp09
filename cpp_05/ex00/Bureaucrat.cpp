@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 10:13:58 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/05 10:54:20 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& ob)
+Bureaucrat::Bureaucrat(const Bureaucrat& ob) : _name(ob._name), _grade(ob._grade)
 {
-	*this = ob;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ob)
 {
 	if (this == &ob)
 		return *this;
-	_grade = ob._grade;
+	this->_grade = ob._grade;
 	return *this;
 }
 
