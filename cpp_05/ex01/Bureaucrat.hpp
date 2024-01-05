@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:25:52 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 10:11:46 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:23:37 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,23 @@ public:
 	Bureaucrat &operator=(const Bureaucrat& ob);
 	~Bureaucrat();
 
-	class	GradeTooHighException;
-	class	GradeTooLowException;
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			const char* what() const throw()
+			{
+				return "Grade of Bureaucrat is too High";
+			}
+	};
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			const char *what() const throw()
+			{
+				return "Grade of Bureaucrat is too Low";
+			}
+	};
+
 	const	std::string getName() const;
 	int		getGrade() const;
 	void	incrementGrage();

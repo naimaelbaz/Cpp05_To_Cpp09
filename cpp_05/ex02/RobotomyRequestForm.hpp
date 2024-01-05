@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooLowException.cpp                           :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 17:57:42 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/04 17:59:20 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/05 15:20:42 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/05 15:34:59 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "GradeTooLowException.hpp"
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
-const char *Bureaucrat::GradeTooLowException::what() const throw()
+#include "AForm.hpp"
+
+class RobotomyRequestForm : public AForm
 {
-	return "Grade too Low";
-}
+public:
+	RobotomyRequestForm();
+	RobotomyRequestForm(const RobotomyRequestForm& ob);
+	RobotomyRequestForm	&operator=(const RobotomyRequestForm& ob);
+	~RobotomyRequestForm();
+	
+
+	
+	void beSigned(const Bureaucrat& bur);
+	void signForm(const Bureaucrat& bur);
+};
+
+#endif

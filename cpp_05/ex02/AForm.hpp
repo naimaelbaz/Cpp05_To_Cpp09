@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:45:26 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 14:22:33 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:20:07 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <iostream>
 #include "Bureaucrat.hpp"
 
-class Form
+class AForm
 {
 private:
 	const	std::string _name;
@@ -24,11 +24,11 @@ private:
 	const	int _gradeToSign;
 	const	int _gradeToExecute;
 public:
-	Form();
-	Form(const std::string name, const int gToSign, const int gToExec);
-	Form(const Form& ob);
-	Form	&operator=(const Form& ob);
-	~Form();
+	AForm();
+	AForm(const std::string name, const int gToSign, const int gToExec);
+	AForm(const AForm& ob);
+	AForm	&operator=(const AForm& ob);
+	virtual	~AForm();
 	
 	class GradeTooHighException : public std::exception
 	{
@@ -50,10 +50,12 @@ public:
 	const	std::string getName() const;
 	int		getGradeToSign() const;
 	int		getGradeToExecute() const;
-	void	beSigned(const Bureaucrat& bur);
-	void	signForm(const Bureaucrat& bur);
+	bool	getIsSigned() const;
+	void	setIsSigned(bool val);
+	virtual void	beSigned(const Bureaucrat& bur) = 0;
+	virtual void	signForm(const Bureaucrat& bur) = 0;
 };
 
-std::ostream& operator<<(std::ostream& COUT, const Form& ob);
+std::ostream& operator<<(std::ostream& COUT, const AForm& ob);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 10:54:20 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:14:44 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "GradeTooHighException.hpp"
-#include "GradeTooLowException.hpp"
+
+/*******************Orthodox_Canonical_Form********************/
 
 Bureaucrat::Bureaucrat() : _name("Default")
 {
@@ -46,6 +46,8 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ob)
 
 Bureaucrat::~Bureaucrat(){}
 
+/*****************geters_And_Seters****************************/
+
 const std::string Bureaucrat::getName() const
 {
 	return (_name);
@@ -55,6 +57,8 @@ int	Bureaucrat::getGrade() const
 {
 	return (_grade);
 }
+
+/********************funct_of_grade****************************/
 
 void Bureaucrat::incrementGrage()
 {
@@ -73,6 +77,8 @@ void Bureaucrat::decrementGrage()
 		throw GradeTooLowException();
 	_grade++;
 }
+
+/*********************Operator**************************/
 
 std::ostream& operator<<(std::ostream& COUT, const Bureaucrat& ob1)
 {

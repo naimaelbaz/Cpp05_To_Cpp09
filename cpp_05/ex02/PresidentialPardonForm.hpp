@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooHighException.hpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 17:31:17 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 11:12:51 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/05 15:26:02 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/05 15:35:18 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRADETOOHighEXCEPTION_HPP
-# define GRADETOOHighEXCEPTION_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
-#include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
-class Bureaucrat::GradeTooHighException : public std::exception
+class PresidentialPardonForm : public AForm
 {
 public:
-	const	char *what() const throw();
+	PresidentialPardonForm();
+	PresidentialPardonForm(const PresidentialPardonForm& ob);
+	PresidentialPardonForm	&operator=(const PresidentialPardonForm& ob);
+	~PresidentialPardonForm();
+	
+
+	
+	void beSigned(const Bureaucrat& bur);
+	void signForm(const Bureaucrat& bur);
 };
 
 #endif
