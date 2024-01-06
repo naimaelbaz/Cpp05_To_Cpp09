@@ -6,11 +6,12 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 15:17:55 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 14:01:13 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 /*******************Orthodox_Canonical_Form********************/
 
@@ -75,6 +76,13 @@ void Bureaucrat::decrementGrage()
 	_grade++;
 }
 
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	if (form.getIsSigned() && this->_grade <= form.getGradeToExecute())
+		std::cout << this->_name << " executed " << form.getName();
+	else
+		std::cout << this->_name << " filed to executed " << form.getName();
+}
 /*********************Operator**************************/
 
 std::ostream& operator<<(std::ostream& COUT, const Bureaucrat& ob1)

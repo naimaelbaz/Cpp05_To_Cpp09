@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:46:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 16:19:49 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:41:12 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,24 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery", 145, 137) 
 {
-	this->setIsSigned(false);
+	this->target = "Default";
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery", 145, 137) 
+{
+	this->target = target;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ob) : AForm("Shrubbery", 145, 137) 
 {
-	(void)ob;
+	this->target = ob.target;
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &ob)
 {
 	if (this == &ob)
 		return (*this);
+	this->target = ob.target;
 	AForm::operator=(ob);
 	return (*this);
 }
@@ -41,10 +47,11 @@ void ShrubberyCreationForm::beSigned(const Bureaucrat& bur)
 {
 	if (this->getGradeToSign() < 1)
 		throw GradeTooHighException();
-	if (this->getGradeToExecute() > 150)
-		throw GradeTooLowException();
 	if (bur.getGrade() <= this->getGradeToExecute())
 		this->setIsSigned(true);
+	else
+		throw GradeTooLowException();
+		
 }
 
 void ShrubberyCreationForm::signForm(const Bureaucrat& bur)
@@ -62,19 +69,26 @@ void ShrubberyCreationForm::signForm(const Bureaucrat& bur)
 				<< bur.getGrade() << '\n';
 }
 
-void ShrubberyCreationForm::AsciiTree(std::string target)
+void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
-	target += "_shrubbery";
-	std::ofstream myFile;
-	myFile.open(target);
-	myFile << "       _-_\n"
-            << "    /~~   ~~\\\n"
-            << " /~~         ~~\\\n"
-            << "{               }\n"
-            << " \\  _-     -_  /\n"
-            << "   ~  \\\\ //  ~\n"
-            << "_- -   | | _- _\n"
-            << "  _ -  | |   -_\n"
-            << "      // \\\\" << '\n';
-	myFile.close();
+	if (this->getIsSigned() && executor.getGrade() <= this->getGradeToExecute())
+	{
+		std::string file = this->target + "_shrubbery";
+		std::ofstream myFile;
+		myFile.open(file);
+		if (!myFile.good())
+			throw "Failed to open file " + file;
+		myFile << "       _-_\n"
+				<< "    /~~   ~~\\\n"
+				<< " /~~         ~~\\\n"
+				<< "{               }\n"
+				<< " \\  _-     -_  /\n"
+				<< "   ~  \\\\ //  ~\n"
+				<< "_- -   | | _- _\n"
+				<< "  _ -  | |   -_\n"
+				<< "      // \\\\" << '\n';
+		myFile.close();
+	}
+	else
+		throw GradeTooLowException();
 }

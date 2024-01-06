@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:23:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 16:15:36 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:44:40 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,24 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy", 72, 45) 
 {
-	this->setIsSigned(false);
+	this->target = "Default";
+}
+
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy", 72, 45) 
+{
+	this->target = target;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ob) : AForm("Robotomy", 145, 137) 
 {
-	(void)ob;
+	this->target = ob.target;
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &ob)
 {
 	if (this == &ob)
 		return (*this);
+	this->target = ob.target;
 	AForm::operator=(ob);
 	return (*this);
 }
@@ -41,10 +47,10 @@ void RobotomyRequestForm::beSigned(const Bureaucrat& bur)
 {
 	if (this->getGradeToSign() < 1)
 		throw GradeTooHighException();
-	if (this->getGradeToExecute() > 150)
-		throw GradeTooLowException();
 	if (bur.getGrade() <= this->getGradeToExecute())
 		this->setIsSigned(true);
+	else
+		throw GradeTooLowException();
 }
 
 void RobotomyRequestForm::signForm(const Bureaucrat& bur)
@@ -60,4 +66,21 @@ void RobotomyRequestForm::signForm(const Bureaucrat& bur)
 				<< this->getGradeToSign()
 				<< " and grade of Bureaucrat is "
 				<< bur.getGrade() << '\n';
+}
+
+void RobotomyRequestForm::execute(Bureaucrat const & executor) const
+{
+	if (this->getIsSigned() && executor.getGrade() <= this->getGradeToExecute())
+	{
+		int	randValue;
+
+		randValue =  rand() % 2;
+		std::cout << this->target << " Makes some drilling noises...\n";
+		if (randValue)
+			std::cout << this->target << " successful!\n";
+		else
+			std::cout << this->target << " failed.\n";
+	}
+	else
+		throw GradeTooLowException();
 }

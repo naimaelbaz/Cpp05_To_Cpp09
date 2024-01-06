@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:19:42 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 15:16:20 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:37:44 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ void Form::beSigned(const Bureaucrat& bur)
 {
 	if (this->_gradeToSign < 1)
 		throw GradeTooHighException();
-	if (this->_gradeToSign > 150)
-		throw GradeTooLowException();
 	if (bur.getGrade() <= this->_gradeToSign)
 		_isSigned = true;
+	else
+		throw GradeTooLowException();
 }
 
 void Form::signForm(const Bureaucrat& bur)

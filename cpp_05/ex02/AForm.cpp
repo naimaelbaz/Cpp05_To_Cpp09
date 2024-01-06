@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:19:42 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 15:10:48 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:38:21 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,33 @@ bool AForm::getIsSigned() const
 void	AForm::setIsSigned(bool val)
 {
 	_isSigned = val;
+}
+
+/********************funct_of_grade****************************/
+
+void AForm::beSigned(const Bureaucrat& bur)
+{
+	if (this->_gradeToSign < 1)
+		throw GradeTooHighException();
+	if (bur.getGrade() <= this->_gradeToSign)
+		_isSigned = true;
+	else
+		throw GradeTooLowException();
+}
+
+void AForm::signForm(const Bureaucrat& bur)
+{
+	this->beSigned(bur);
+	if (_isSigned)
+		std::cout << bur.getName()
+				<< " signed " << this->getName() << '\n';
+	else
+		std::cout << bur.getName()
+				<< " couldn't sign " << this->getName()
+				<< " because grade of form to sign is "
+				<< this->getGradeToSign()
+				<< " and grade of Bureaucrat is "
+				<< bur.getGrade() << '\n';
 }
 
 /*********************Operator**************************/

@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:25:52 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 14:30:49 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:55:32 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <exception>
 # include <iostream>
+
+class AForm;
 
 class Bureaucrat
 {
@@ -49,6 +51,7 @@ public:
 	int		getGrade() const;
 	void	incrementGrage();
 	void	decrementGrage();
+	void	executeForm(AForm const & form);
 };
 
 std::ostream& operator<<(std::ostream& COUT, const Bureaucrat& ob1);

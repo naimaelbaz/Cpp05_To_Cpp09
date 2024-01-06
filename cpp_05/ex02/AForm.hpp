@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:45:26 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 15:20:07 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 13:39:54 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ public:
 			}
 	};
 
-	const	std::string getName() const;
-	int		getGradeToSign() const;
-	int		getGradeToExecute() const;
-	bool	getIsSigned() const;
-	void	setIsSigned(bool val);
-	virtual void	beSigned(const Bureaucrat& bur) = 0;
-	virtual void	signForm(const Bureaucrat& bur) = 0;
+	const			std::string getName() const;
+	int				getGradeToSign() const;
+	int				getGradeToExecute() const;
+	bool			getIsSigned() const;
+	void			setIsSigned(bool val);
+	virtual void	beSigned(const Bureaucrat& bur);
+	virtual void	signForm(const Bureaucrat& bur);
+	virtual void	execute(Bureaucrat const & executor) const = 0;
+	
 };
 
 std::ostream& operator<<(std::ostream& COUT, const AForm& ob);
