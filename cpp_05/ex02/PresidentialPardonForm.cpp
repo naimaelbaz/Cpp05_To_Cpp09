@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:27:20 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 13:47:50 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:33:53 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,6 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 PresidentialPardonForm::~PresidentialPardonForm(){}
 
 /****************Func_of_grade*************************/
-
-void PresidentialPardonForm::beSigned(const Bureaucrat& bur)
-{
-	if (this->getGradeToSign() < 1)
-		throw GradeTooHighException();
-	if (bur.getGrade() <= this->getGradeToExecute())
-		this->setIsSigned(true);
-	else
-		throw GradeTooLowException();
-}
-
-void PresidentialPardonForm::signForm(const Bureaucrat& bur)
-{
-	this->beSigned(bur);
-	if (this->getIsSigned())
-		std::cout << bur.getName()
-				<< " signed " << this->getName() << '\n';
-	else
-		std::cout << bur.getName()
-				<< " couldn't sign " << this->getName()
-				<< " because grade of form to sign is "
-				<< this->getGradeToSign()
-				<< " and grade of Bureaucrat is "
-				<< bur.getGrade() << '\n';
-}
-
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {

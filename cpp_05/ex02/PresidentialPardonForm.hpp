@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:26:02 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 13:49:47 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:33:42 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ public:
 	PresidentialPardonForm	&operator=(const PresidentialPardonForm& ob);
 	~PresidentialPardonForm();
 
-	void beSigned(const Bureaucrat& bur);
-	void signForm(const Bureaucrat& bur);
 	void execute(Bureaucrat const & executor) const;
 };
 

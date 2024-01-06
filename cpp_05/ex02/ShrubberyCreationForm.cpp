@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:46:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 13:41:12 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:52:40 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,6 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 /****************Func_of_grade*************************/
-
-void ShrubberyCreationForm::beSigned(const Bureaucrat& bur)
-{
-	if (this->getGradeToSign() < 1)
-		throw GradeTooHighException();
-	if (bur.getGrade() <= this->getGradeToExecute())
-		this->setIsSigned(true);
-	else
-		throw GradeTooLowException();
-		
-}
-
-void ShrubberyCreationForm::signForm(const Bureaucrat& bur)
-{
-	this->beSigned(bur);
-	if (this->getIsSigned())
-		std::cout << bur.getName()
-				<< " signed " << this->getName() << '\n';
-	else
-		std::cout << bur.getName()
-				<< " couldn't sign " << this->getName()
-				<< " because grade of form to sign is "
-				<< this->getGradeToSign()
-				<< " and grade of Bureaucrat is "
-				<< bur.getGrade() << '\n';
-}
 
 void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {

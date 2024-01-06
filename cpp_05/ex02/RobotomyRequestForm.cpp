@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:23:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 13:44:40 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:33:28 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy",
 	this->target = target;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ob) : AForm("Robotomy", 145, 137) 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ob) : AForm("Robotomy", 72, 45) 
 {
 	this->target = ob.target;
 }
@@ -43,37 +43,12 @@ RobotomyRequestForm::~RobotomyRequestForm(){}
 
 /****************Func_of_grade*************************/
 
-void RobotomyRequestForm::beSigned(const Bureaucrat& bur)
-{
-	if (this->getGradeToSign() < 1)
-		throw GradeTooHighException();
-	if (bur.getGrade() <= this->getGradeToExecute())
-		this->setIsSigned(true);
-	else
-		throw GradeTooLowException();
-}
-
-void RobotomyRequestForm::signForm(const Bureaucrat& bur)
-{
-	this->beSigned(bur);
-	if (this->getIsSigned())
-		std::cout << bur.getName()
-				<< " signed " << this->getName() << '\n';
-	else
-		std::cout << bur.getName()
-				<< " couldn't sign " << this->getName()
-				<< " because grade of form to sign is "
-				<< this->getGradeToSign()
-				<< " and grade of Bureaucrat is "
-				<< bur.getGrade() << '\n';
-}
-
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	if (this->getIsSigned() && executor.getGrade() <= this->getGradeToExecute())
 	{
 		int	randValue;
-
+		std::srand(std::time(0));
 		randValue =  rand() % 2;
 		std::cout << this->target << " Makes some drilling noises...\n";
 		if (randValue)

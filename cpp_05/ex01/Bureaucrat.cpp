@@ -6,17 +6,17 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/05 15:14:56 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:15:51 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
+#include "Form.hpp"
 /*******************Orthodox_Canonical_Form********************/
 
 Bureaucrat::Bureaucrat() : _name("Default")
 {
-	_grade = 0;
+	_grade = 150;
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
@@ -59,20 +59,33 @@ int	Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrage()
 {
-	int i;
-	i = _grade - 1;
-	if (i < 1)
+	if ((_grade - 1) < 1)
 		throw GradeTooHighException();
 	_grade--;
 }
 
 void Bureaucrat::decrementGrage()
 {
-	int i;
-	i = _grade + 1;
-	if (i > 150)
+	if ((_grade + 1) > 150)
 		throw GradeTooLowException();
 	_grade++;
+}
+
+void Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name
+				<< " signed " << form.getName() << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->_name
+			<< " couldn't sign " << form.getName()
+			<< " because ";
+		std::cerr << e.what() << '\n';
+	}
 }
 
 /*********************Operator**************************/
@@ -81,4 +94,16 @@ std::ostream& operator<<(std::ostream& COUT, const Bureaucrat& ob1)
 {
 	COUT << ob1.getName() << ", bureaucrat grade " << ob1.getGrade();
 	return COUT;
+}
+
+/*********************Exceptions****************************/
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Grade of Bureaucrat is too High";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade of Bureaucrat is too Low";
 }
