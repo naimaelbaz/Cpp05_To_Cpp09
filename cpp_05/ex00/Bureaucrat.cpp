@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 17:10:14 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/06 19:48:29 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 Bureaucrat::Bureaucrat() : _name("Default")
 {
-	_grade = 0;
+	_grade = 150;
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
