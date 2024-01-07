@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 17:09:45 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 11:31:55 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	Bureaucrat::executeForm(AForm const & form)
 	}
 	catch(const std::exception& e)
 	{
-		std::cout << this->_name << " filed to executed " << form.getName() << " because ";
+		std::cout << this->_name << " failed to executed " << form.getName() << " because ";
 		std::cerr << e.what() << '\n';
 	}
 }

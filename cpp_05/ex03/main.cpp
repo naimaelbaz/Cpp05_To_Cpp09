@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:17:22 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/07 11:13:18 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 11:54:35 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main()
 		// ShrubberyCreationForm
 		try
 		{
-			ob = I1.makeForm("Shrubbery creation", "file");
+			ob = I1.makeForm("shrubbery creation", "file");
 			if (!ob)
 				throw "";
 			Bureaucrat bur1("b1", 136);
@@ -44,7 +44,7 @@ int main()
 		// RobotomyRequestForm
 		try
 		{
-			ob1 = I2.makeForm("Robotomy request", "Robot");
+			ob1 = I2.makeForm("robotomy request", "Robot");
 			if (!ob1)
 				throw "";
 			Bureaucrat bur2("b2", 40);
@@ -59,7 +59,7 @@ int main()
 		// PresidentialPardonForm
 		try
 		{
-			ob2 = I3.makeForm("Presidential pardon", "prisoner");
+			ob2 = I3.makeForm("presidential pardon", "prisoner");
 			if (!ob2)
 				throw "";
 			Bureaucrat bur3("b3", 4);

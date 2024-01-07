@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:46:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 15:52:40 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 11:27:57 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubb
 	this->target = target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ob) : AForm("Shrubbery", 145, 137) 
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ob) : AForm(ob) 
 {
 	this->target = ob.target;
 }

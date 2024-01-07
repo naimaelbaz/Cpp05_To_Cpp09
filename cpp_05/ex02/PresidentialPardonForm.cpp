@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:27:20 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 15:33:53 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 11:30:44 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Pres
 	this->target = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ob) : AForm("Presidential", 25, 5) 
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ob) : AForm(ob)
 {
 	this->target = ob.target;
 }

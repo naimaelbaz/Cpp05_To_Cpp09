@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 17:13:59 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 20:36:32 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 12:05:33 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class Intern
 {
+private:
+	AForm *CreateShrubbery(std::string target);
+	AForm *CreateRobotomy(std::string target);
+	AForm *CreatePresidential(std::string target);
 public:
 	Intern();
 	Intern(const Intern& ob);
@@ -24,7 +28,6 @@ public:
 	~Intern();
 
 	AForm *makeForm(std::string FormName, std::string target);
-	void printMsg(std::string msg);
 };
 
 #endif

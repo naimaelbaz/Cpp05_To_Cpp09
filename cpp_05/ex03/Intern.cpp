@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 17:29:13 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 20:43:34 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 12:05:42 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,38 @@ Intern &Intern::operator=(const Intern& ob)
 
 Intern::~Intern() {}
 
-void Intern::printMsg(std::string msg)
+AForm *Intern::CreateShrubbery(std::string target)
 {
-	std::cout << msg << '\n';
+	return new ShrubberyCreationForm(target);
+}
+
+AForm *Intern::CreateRobotomy(std::string target)
+{
+	return new RobotomyRequestForm(target);
+}
+
+AForm *Intern::CreatePresidential(std::string target)
+{
+	return new PresidentialPardonForm(target);
 }
 
 AForm *Intern::makeForm(std::string FormName, std::string target)
 {
-	AForm *ob = NULL;
-
-	ob = (FormName == "Shrubbery creation" ? new ShrubberyCreationForm(target) : ob);
-	ob = (FormName == "Robotomy request" ? new RobotomyRequestForm(target) : ob);
-	ob = (FormName == "Presidential pardon" ? new PresidentialPardonForm(target) : ob);
-	ob == NULL ? this->printMsg("Intern failed to create " + FormName)
-				: this->printMsg("Intern creates " + FormName);
-	return(ob);
+	AForm *(Intern::*ptr[3])(std::string _target) = 
+	{
+		&Intern::CreateShrubbery,
+		&Intern::CreateRobotomy,
+		&Intern::CreatePresidential
+	};
+	std::string str[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+	for (int i = 0; i < 3; i++)
+	{
+		if (str[i] == FormName)
+		{
+			std::cout << "the form was created\n";
+			return (this->*ptr[i])(target);
+		}
+	}
+	std::cout << "failed to create the form\n";
+	return NULL;
 }
