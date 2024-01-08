@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 17:29:13 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/07 12:05:42 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:11:09 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ AForm *Intern::makeForm(std::string FormName, std::string target)
 	{
 		if (str[i] == FormName)
 		{
-			std::cout << "the form was created\n";
+			std::cout << "the " << FormName <<" was created\n";
 			return (this->*ptr[i])(target);
 		}
 	}
-	std::cout << "failed to create the form\n";
+	std::cout << "failed to create the "<< FormName << " form" <<'\n';
 	return NULL;
 }

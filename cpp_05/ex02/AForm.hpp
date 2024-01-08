@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:45:26 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 15:21:45 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/07 12:11:08 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ public:
 	int				getGradeToExecute() const;
 	bool			getIsSigned() const;
 	void			setIsSigned(bool val);
-	virtual void	beSigned(const Bureaucrat& bur);
+	void			beSigned(const Bureaucrat& bur);
 	virtual void	execute(Bureaucrat const & executor) const = 0;
 	
 };

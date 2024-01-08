@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:32:09 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 15:15:51 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:08:27 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void Bureaucrat::signForm(Form& form)
 	{
 		std::cout << this->_name
 			<< " couldn't sign " << form.getName()
-			<< " because ";
-		std::cerr << e.what() << '\n';
+			<< " because " << e.what() << '\n';
 	}
 }
 

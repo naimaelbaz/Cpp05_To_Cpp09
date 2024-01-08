@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:23:15 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/06 15:33:28 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:11:52 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy",
 	this->target = target;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ob) : AForm("Robotomy", 72, 45) 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ob) : AForm(ob)
 {
 	this->target = ob.target;
 }
