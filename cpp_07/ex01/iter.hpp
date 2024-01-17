@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 18:03:13 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/14 14:41:32 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/16 18:02:08 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/17 16:14:09 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-int main(int ac, char const *av[])
+#ifndef ITER_HPP
+#define ITER_HPP
+
+#include <iostream>
+
+template <typename TA, typename TF>
+void iter(TA *add, unsigned int length, TF func)
 {
-	try
-	{
-		if (ac == 2)
-			ScalarConverter::convert(av[1]);
-		else
-			throw "error in number of argements";
-	}
-	catch(const char* e)
-	{
-		std::cerr << e << '\n';
-	}
+	if (!add || !func)
+		throw "Error";
+	for (unsigned int i = 0; i < length; i++)
+		func(add[i]);
 }
+
+template <typename T>
+void print2(T arg)
+{
+	std::cout << arg;
+}
+#endif

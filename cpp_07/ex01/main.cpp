@@ -5,23 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 18:03:13 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/14 14:41:32 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/16 17:38:09 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/17 16:14:55 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-int main(int ac, char const *av[])
+#include "iter.hpp"
+
+void print(char x)
+{
+	std::cout << x;
+}
+
+int main()
 {
 	try
 	{
-		if (ac == 2)
-			ScalarConverter::convert(av[1]);
-		else
-			throw "error in number of argements";
+		/******** Simple function *********/
+		int tab[] = {'n', 'a', 'i', 'm', 'a'};
+		iter( tab, 5, print);
+		std::cout << "\n";
+
+		/******** Template function *********/
+		iter( tab, 5, print2<char>);
+		std::cout << "\n";
+		
 	}
 	catch(const char* e)
 	{
 		std::cerr << e << '\n';
 	}
+	
+	return 0;
 }

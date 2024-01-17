@@ -6,12 +6,13 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:08:33 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/13 10:51:49 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/15 10:38:59 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <limits>
+#include <cstring>
 #include <sstream>
 
 ScalarConverter::ScalarConverter(){}
@@ -29,11 +30,19 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter& ob)
 
 ScalarConverter::~ScalarConverter(){}
 
-void ScalarConverter::convertToInt(double Double, std::string toConvert)
+static std::string to_lower(std::string str)
+{
+	std::string res;
+	for (size_t i = 0; i < str.length(); i++)
+		str[i] = tolower(str[i]);
+	return(str);
+}
+
+void ScalarConverter::convertToInt(double Double, const std::string& toConvert)
 {
 	try
 	{
-		if (toConvert == "nan" || toConvert == "nanf")
+		if (to_lower(toConvert) == "nan" || to_lower(toConvert) == "nanf")
 			throw "int: Imposible";
 		if (Double > INT_MAX || Double < INT_MIN)
 			throw "int: Imposible";
@@ -52,7 +61,7 @@ void ScalarConverter::convertToChar(double Double)
 	{
 		char Character;
 		int TmpInteger = static_cast<int>(Double);
-		if (TmpInteger >= 32 && TmpInteger <= 126)
+		if (isprint(TmpInteger))
 			Character = static_cast<char>(TmpInteger);
 		else if ((TmpInteger >= 0 && TmpInteger < 32)
 			|| (TmpInteger >= 127 && TmpInteger <= 255))
@@ -67,7 +76,7 @@ void ScalarConverter::convertToChar(double Double)
 	}
 }
 
-void ScalarConverter::convertToDoubleOrFloat(double Double, std::string toConvert)
+void ScalarConverter::convertToDoubleOrFloat(double Double, const std::string& toConvert)
 {
 	try
 	{
@@ -88,7 +97,7 @@ void ScalarConverter::convertToDoubleOrFloat(double Double, std::string toConver
 	}
 }
 
-void ScalarConverter::convert(std::string toConvert)
+void ScalarConverter::convert(const std::string& toConvert)
 {
 	try
 	{
@@ -100,9 +109,7 @@ void ScalarConverter::convert(std::string toConvert)
 		Double = strtod(toConvert.c_str(), &pos);
 		if (isprint(toConvert[0]) && !isdigit(toConvert[0]) && toConvert[1] == '\0')
 			Double = static_cast<double>(toConvert[0]);
-		else if ((pos[0] == 'f' && pos[1] == '\0') || pos[0] == '\0')
-			Double = strtod(toConvert.c_str(), &pos);
-		else
+		else if (!((pos[0] == 'f' && pos[1] == '\0') || pos[0] == '\0'))
 			throw "Impossible";
 		obj.convertToChar(Double);
 		obj.convertToInt(Double, toConvert);

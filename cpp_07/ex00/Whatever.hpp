@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 18:03:13 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/14 14:41:32 by nel-baz          ###   ########.fr       */
+/*   Created: 2024/01/16 15:46:20 by nel-baz           #+#    #+#             */
+/*   Updated: 2024/01/17 14:35:07 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-int main(int ac, char const *av[])
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
+
+template <typename T>
+void	swap(T &first, T &second)
 {
-	try
-	{
-		if (ac == 2)
-			ScalarConverter::convert(av[1]);
-		else
-			throw "error in number of argements";
-	}
-	catch(const char* e)
-	{
-		std::cerr << e << '\n';
-	}
+	T tmp;
+	tmp = first;
+	first = second;
+	second = tmp;
 }
+
+template <typename T>
+T	min(T first, T second)
+{
+	return (first < second ? first : second);
+}
+
+
+template <typename T>
+T	max(T first, T second)
+{
+	return (first > second ? first : second);
+}
+
+#endif

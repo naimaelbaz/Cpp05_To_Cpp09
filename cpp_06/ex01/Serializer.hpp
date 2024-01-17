@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:34:53 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/13 13:52:24 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/14 14:47:52 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ class Serializer
 private:
 	Serializer();
 	Serializer(const Serializer& obj);
-	
-public:
 	Serializer &operator=(const Serializer& obj);
 	~Serializer();
-
+	
+public:
 	static uintptr_t serialize(Data* ptr);
 	static Data* deserialize(uintptr_t raw);
 };
