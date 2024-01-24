@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:56:54 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/22 15:22:42 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:32:18 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ public:
 	~Span();
 
 	void addNumber(int number);
-	int shortestSpan() const;
-	int longestSpan() const;
+	int shortestSpan();
+	int longestSpan();
+	void addRangeOfNumbers(const std::vector<int>::iterator& begin, const std::vector<int>::iterator& end);
 };
 
 
