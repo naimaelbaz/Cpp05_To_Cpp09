@@ -25,10 +25,10 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::sortOneRnge(Vec& first_m, Vec& second_m, Vec& first_p, Vec& second_p, Vec& main, Vec& pend)
 {
-	std::vector<int>::iterator it_Fm = first_m.begin();
-	std::vector<int>::iterator it_Sm = second_m.begin();
-	std::vector<int>::iterator it_Fp = first_p.begin();
-	std::vector<int>::iterator it_Sp = second_p.begin();
+	Vec::iterator it_Fm = first_m.begin();
+	Vec::iterator it_Sm = second_m.begin();
+	Vec::iterator it_Fp = first_p.begin();
+	Vec::iterator it_Sp = second_p.begin();
 	int i = 0;
 	while (it_Fm != first_m.end() && it_Sm != second_m.end())
 	{
@@ -67,10 +67,10 @@ void PmergeMe::mergeSort(Vec& main, Vec& pend)
 {
 	if (main.size() <= 1)
 		return ;
-	std::vector<int> first_m(main.size() / 2);
-	std::vector<int> second_m(main.size() - (main.size() / 2));
-	std::vector<int> first_p(main.size() / 2);
-	std::vector<int> second_p(main.size() - (main.size() / 2));
+	Vec first_m(main.size() / 2);
+	Vec second_m(main.size() - (main.size() / 2));
+	Vec first_p(main.size() / 2);
+	Vec second_p(main.size() - (main.size() / 2));
 	for (size_t i = 0; i < first_m.size(); i++)
 		first_m[i] = main[i];
 	for (size_t i = first_m.size(); i < main.size(); i++)
@@ -174,31 +174,26 @@ void PmergeMe::InsertPendInMain(void)
 void PmergeMe::SortRnage(char const **seqInt)
 {
 	int i = 1;
-	try
+
+	clock_t start_time_v = clock();
+	while (seqInt[i])
 	{
-		clock_t start_time_v = clock();
-		while (seqInt[i])
-		{
-			std::string tmpStr = seqInt[i];
-			if (tmpStr.find_first_not_of("0123456789") != std::string::npos || tmpStr.empty())
-				throw std::invalid_argument("Error: Invalid number in the given sequence!");
-			int num = atoi(seqInt[i]);
-			if (num < 0)
-				throw std::invalid_argument("Error: Number greater than max int!");
-			if (std::find(myVec.begin(), myVec.end(), num) != myVec.end())
-				throw std::invalid_argument("Error: Duplicate number in sequence!");
-			this->myVec.push_back(atoi(seqInt[i]));
-			i++;
-		}
-		this->PendAndMain();
-		this->InsertPendInMain();
-		clock_t end_time_v = clock();
-		this->duration_vec = (static_cast<double>(end_time_v - start_time_v) / CLOCKS_PER_SEC) * 1e6;
+		std::string tmpStr = seqInt[i];
+		if (tmpStr.find_first_not_of("0123456789") != std::string::npos || tmpStr.empty())
+			throw std::invalid_argument("Error: Invalid number in the given sequence!");
+		int num = atoi(seqInt[i]);
+		if (num < 0)
+			throw std::invalid_argument("Error: Number greater than max int!");
+		if (std::find(myVec.begin(), myVec.end(), num) != myVec.end())
+			throw std::invalid_argument("Error: Duplicate number in sequence!");
+		this->myVec.push_back(atoi(seqInt[i]));
+		i++;
 	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
-	}
+	this->PendAndMain();
+	this->InsertPendInMain();
+	clock_t end_time_v = clock();
+	this->duration_vec = (static_cast<double>(end_time_v - start_time_v) / CLOCKS_PER_SEC) * 1e6;
+	
 }
 
 
@@ -366,29 +361,23 @@ void PmergeMe::InsertPendInMain(int)
 void PmergeMe::SortRnage(char const **seqInt, int)
 {
 	int i = 1;
-	try
+
+	clock_t start_time_d = clock();
+	while (seqInt[i])
 	{
-		clock_t start_time_d = clock();
-		while (seqInt[i])
-		{
-			std::string tmpStr = seqInt[i];
-			if (tmpStr.find_first_not_of("0123456789") != std::string::npos || tmpStr.empty())
-				throw std::invalid_argument("Error: Invalid number in the given sequence!");
-			int num = atoi(seqInt[i]);
-			if (num < 0)
-				throw std::invalid_argument("Error: Number greater than max int!");
-			if (std::find(myDeq.begin(), myDeq.end(), num) != myDeq.end())
-				throw std::invalid_argument("Error: Duplicate number in sequence!");
-			this->myDeq.push_back(atoi(seqInt[i]));
-			i++;
-		}
-		this->PendAndMain(0);
-		this->InsertPendInMain(0);
-		clock_t end_time_d = clock();
-		duration_deq = (static_cast<double>(end_time_d - start_time_d) / CLOCKS_PER_SEC) * 1e6;
+		std::string tmpStr = seqInt[i];
+		if (tmpStr.find_first_not_of("0123456789") != std::string::npos || tmpStr.empty())
+			throw std::invalid_argument("Error: Invalid number in the given sequence!");
+		int num = atoi(seqInt[i]);
+		if (num < 0)
+			throw std::invalid_argument("Error: Number greater than max int!");
+		if (std::find(myDeq.begin(), myDeq.end(), num) != myDeq.end())
+			throw std::invalid_argument("Error: Duplicate number in sequence!");
+		this->myDeq.push_back(atoi(seqInt[i]));
+		i++;
 	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
-	}
+	this->PendAndMain(0);
+	this->InsertPendInMain(0);
+	clock_t end_time_d = clock();
+	duration_deq = (static_cast<double>(end_time_d - start_time_d) / CLOCKS_PER_SEC) * 1e6;
 }

@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:35:37 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/27 16:06:06 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/02/03 19:11:22 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <vector>
 
 
 class BitcoinExchange
 {
 private:
 	typedef std::map<std::string, std::string> myMap;
+	typedef std::map<size_t, std::string> myMap_data;
 	myMap _data;
-	myMap dataFile;
+	myMap_data dataFile;
 
 	bool	checkForSpecialChar(const std::string& str);
 	void	checkErrorInKey(myMap::iterator it);

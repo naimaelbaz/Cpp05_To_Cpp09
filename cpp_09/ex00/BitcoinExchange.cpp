@@ -6,7 +6,7 @@
 /*   By: nel-baz <nel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:53:18 by nel-baz           #+#    #+#             */
-/*   Updated: 2024/01/28 11:25:40 by nel-baz          ###   ########.fr       */
+/*   Updated: 2024/02/03 18:49:06 by nel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &obj)
 		return (*this);
 	this->_data.erase(this->_data.begin(), this->_data.end());
 	this->_data.insert(obj._data.begin(), obj._data.end());
-	this->dataFile.erase(this->_data.begin(), this->_data.end());
-	this->dataFile.insert(obj._data.begin(), obj._data.end());
+	this->dataFile.erase(this->dataFile.begin(), this->dataFile.end());
+	this->dataFile.insert(obj.dataFile.begin(), obj.dataFile.end());
 	return (*this);
 }
 
@@ -73,11 +73,11 @@ void BitcoinExchange::checkForDate(std::string year, std::string month,
 	if (num_d < 1 || num_d > 31)
 		throw ErrorHandling(day + " is invalid day in the month");
 	if ((num_m == 4 || num_m == 6 || num_m == 9 || num_m == 11) && num_d == 31)
-		throw ErrorHandling(day + " is invalid day in the month" + month);
+		throw ErrorHandling(day + " is invalid day in the month " + month);
 	if ((num_y % 400 == 0 || num_y % 4 == 0) && num_m == 2 && num_d > 29)
-		throw ErrorHandling(day + " is invalid day in the month" + month);
+		throw ErrorHandling(day + " is invalid day in the month " + month);
 	else if (!(num_y % 4 == 0) && num_m == 2 && num_d > 28)
-		throw ErrorHandling(day + " is invalid day in the month" + month);
+		throw ErrorHandling(day + " is invalid day in the month " + month);
 }
 
 void BitcoinExchange::checkErrorInKey(myMap::iterator it)
@@ -141,10 +141,19 @@ void BitcoinExchange::saveDataInMap(const std::string &fileName)
 	std::ifstream myfile(fileName);
 	if (myfile.is_open())
 	{
+		try
+		{
+			std::getline(myfile, str);
+			if (strcmp(str.c_str(), "date | value"))
+				throw ErrorHandling(" The initial line in file must follow the format (date | value)");
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << "Error:" << e.what() << '\n';
+			return;
+		}
 		while (std::getline(myfile, str))
 		{
-			if (!strcmp(str.c_str(), "date | value"))
-				continue ;
 			try
 			{
 				if (!this->checkForSpecialChar(str))
@@ -156,25 +165,27 @@ void BitcoinExchange::saveDataInMap(const std::string &fileName)
 				this->checkErrorInKey(it);
 				num = this->checkErrorInValue(it);
 				this->OpenDataFile();
-				myMap::iterator it_f = dataFile.find(key);
+				std::remove(key.begin(), key.end(), '-');
+				size_t n = strtoul(key.c_str(), NULL, 10);
+				myMap_data::iterator it_f = dataFile.find(n);
 				if (it_f == dataFile.end())
 				{
-					it_f = dataFile.lower_bound(key);
-					if (it_f != dataFile.begin())
-						it_f--;
+					it_f = dataFile.lower_bound(n);
+					if (it_f == dataFile.begin())
+						throw ErrorHandling(" Out of my Data!");
+					it_f--;
 					if (it_f == dataFile.end())
-					throw ErrorHandling(" bad input => " + str);
-					num2 = std::strtod(it_f->second.c_str(), &pos);
-					std::cout << it->first << "=> " << num
-								<< " = " << num * num2 << "\n";
+						throw ErrorHandling(" bad input => " + str);
 				}
+				num2 = std::strtod(it_f->second.c_str(), &pos);
+				std::cout << it->first << "=> " << num
+							<< " = " << num * num2 << "\n";
 			}
 			catch(const std::exception& e)
 			{
 				std::cerr << "Error:" << e.what() << '\n';
 			}
 		}
-		
 	}
 	else
 		throw "Unable to open file";
@@ -195,7 +206,9 @@ void BitcoinExchange::OpenDataFile()
 				continue ;
 			key = std::strtok(const_cast<char *>(str.c_str()), ",");
 			value = std::strtok(NULL, ",");
-			this->dataFile[key] = value;
+			key.erase(std::remove(key.begin(), key.end(), '-'), key.end());
+			size_t n = strtoul(key.c_str(), NULL, 10);
+			this->dataFile[n] = value;
 		}
 	}
 	else
